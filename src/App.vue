@@ -3,7 +3,7 @@
   <main id="primary-main">
     <section><GameBoard></GameBoard></section>
   </main>
-  <footer><p>Svenska Gamers Squad Bingo</p></footer>
+  <footer id="primary-footer"><p>Svenska Gamers Squad Bingo</p></footer>
 </template>
 
 <script>
@@ -18,4 +18,11 @@ export default {
 
 <style scoped>
 @import "./style/App.css";
+
+h1 {
+  color: #bbb;
+}
+p {
+  color: #aaa;
+}
 </style>

@@ -12,10 +12,15 @@ body {
   min-height: 100vh;
 }
 #primary-header {
+  background: #334;
 }
 #primary-main {
   flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #222;
+}
+#primary-footer {
+  background: #334;
 }
