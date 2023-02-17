@@ -4,7 +4,7 @@
       <li
         class="grid-item"
         v-for="(item, index) in items"
-        @click="updateItem(index)"
+        @click="$emit('updateItem', index)"
         v-bind:key="index"
         :class="{ selected: item.selected }"
       >
@@ -15,22 +15,10 @@
 </template>
 
 <script>
-import { squad as data } from "../assets/data.json";
-import { getItems } from "../utils/itemUtils";
 export default {
   name: "GameBoard",
-  data() {
-    return {
-      items: getItems(data)
-    };
-  },
-  methods: {
-    updateItem(item) {
-      console.log("Test", item);
-      const { value, selected } = this.items[item];
-      this.items[item] = { value, selected: !selected };
-    }
-  }
+  props: ["items"],
+  emits: ["updateItem"]
 };
 </script>
 
