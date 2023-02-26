@@ -1,5 +1,8 @@
 <template>
-  <header id="primary-header"><h1>SG Bingo</h1></header>
+  <header id="primary-header">
+    <h1>SG Bingo</h1>
+    <button @click="newGame">New game</button>
+  </header>
   <main id="primary-main">
     <section>
       <GameBoard :items="items" @update-item="updateItem"></GameBoard>
@@ -19,14 +22,20 @@ export default {
   },
   data() {
     return {
-      items: getItems(data.squad)
+      items: []
     };
   },
   methods: {
+    newGame() {
+      this.items = getItems([...data.squad]);
+    },
     updateItem(item) {
       const { value, selected } = this.items[item];
       this.items[item] = { value, selected: !selected };
     }
+  },
+  mounted() {
+    this.newGame();
   }
 };
 </script>
