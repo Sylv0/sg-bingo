@@ -31,6 +31,8 @@ export default {
   methods: {
     newGame() {
       this.items = getItems([...data.squad]);
+      this.bingos.column.clear();
+      this.bingos.row.clear();
     },
     updateItem(item) {
       const { value, selected } = this.items[item];
