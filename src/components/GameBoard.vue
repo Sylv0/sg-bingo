@@ -1,13 +1,8 @@
 <template>
   <div class="container">
     <ul class="grid">
-      <li
-        class="grid-item"
-        v-for="(item, index) in items"
-        @click="$emit('updateItem', index)"
-        v-bind:key="index"
-        :class="{ selected: item.selected }"
-      >
+      <li class="grid-item" v-for="(item, index) in items" @click="$emit('updateItem', index)" v-bind:key="index"
+        :class="{ selected: item.selected, bingo: isBingo(index) }">
         {{ item.value }}
       </li>
     </ul>
@@ -15,10 +10,18 @@
 </template>
 
 <script>
+import { indexToCoordinates } from '@/utils/itemUtils';
+
 export default {
   name: "GameBoard",
-  props: ["items"],
-  emits: ["updateItem"]
+  props: ["items", "bingos"],
+  emits: ["updateItem"],
+  methods: {
+    isBingo(index) {
+      const [x, y] = indexToCoordinates(index);
+      return this.bingos.row.has(y) || this.bingos.column.has(x);
+    }
+  },
 };
 </script>
 
@@ -30,6 +33,7 @@ export default {
   list-style: none;
   padding: 0;
 }
+
 .grid-item {
   aspect-ratio: 1;
   vertical-align: middle;
@@ -42,13 +46,20 @@ export default {
   user-select: none;
   padding: 1rem;
 }
+
 .grid-item.selected {
-  background: #bdc;
+  background: rgb(131, 205, 227);
 }
+
 .grid-item:hover {
   background-color: #99a;
 }
-.grid-item.grid-item.selected:hover {
-  background-color: #ced;
+
+.grid-item.selected:hover {
+  background-color: rgb(179, 225, 233);
+}
+
+.grid-item.bingo {
+  background-color: rgb(67, 228, 113);
 }
 </style>
