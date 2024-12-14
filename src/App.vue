@@ -33,6 +33,8 @@ export default {
       this.items = getItems([...data.squad]);
       this.bingos.column.clear();
       this.bingos.row.clear();
+      this.bingos.leftToRight = false;
+      this.bingos.rightToLeft = false;
     },
     updateItem(item) {
       const { value, selected } = this.items[item];
