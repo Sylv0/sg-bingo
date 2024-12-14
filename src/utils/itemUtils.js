@@ -35,7 +35,7 @@ export const fillRemaining = (array = []) => {
 export const getItems = (data) => {
   return shuffle(fillRemaining(data))
     .splice(0, 25)
-    .map((item) => ({ value: item, selected: false }));
+    .map((item) => ({ value: item, selected: false, bingo: false }));
 };
 
 /**
@@ -61,3 +61,6 @@ export const indexToCoordinates = (index) => {
 export const coordinatesToIndex = (x, y) => {
   return x + 5 * y;
 }
+
+export const isLeftToRight = (index) => index % 6 === 0
+export const isRightToLeft = (index) => index >= 4 && index <= 20 && index % 4 === 0

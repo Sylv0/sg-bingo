@@ -2,7 +2,7 @@
   <div class="container">
     <ul class="grid">
       <li class="grid-item" v-for="(item, index) in items" @click="$emit('updateItem', index)" v-bind:key="index"
-        :class="{ selected: item.selected, bingo: isBingo(index) }">
+        :class="{ selected: item.selected, bingo: item.bingo }">
         {{ item.value }}
       </li>
     </ul>
@@ -10,18 +10,12 @@
 </template>
 
 <script>
-import { indexToCoordinates } from '@/utils/itemUtils';
 
 export default {
   name: "GameBoard",
   props: ["items", "bingos"],
   emits: ["updateItem"],
-  methods: {
-    isBingo(index) {
-      const [x, y] = indexToCoordinates(index);
-      return this.bingos.row.has(y) || this.bingos.column.has(x);
-    }
-  },
+  methods: {},
 };
 </script>
 
@@ -45,6 +39,10 @@ export default {
   box-sizing: border-box;
   user-select: none;
   padding: 1rem;
+
+  transition: all 0.2s ease-in-out;
+
+  position: relative;
 }
 
 .grid-item.selected {

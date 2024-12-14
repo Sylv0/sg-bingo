@@ -16,7 +16,7 @@
 <script>
 import GameBoard from "./components/GameBoard.vue";
 import data from "./assets/data.json";
-import { coordinatesToIndex, getItems, indexToCoordinates, } from "./utils/itemUtils";
+import { coordinatesToIndex, getItems, indexToCoordinates, isLeftToRight, isRightToLeft, } from "./utils/itemUtils";
 export default {
   name: "App",
   components: {
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       items: [],
-      bingos: { row: new Set(), column: new Set() },
+      bingos: { row: new Set(), column: new Set(), leftToRight: false, rightToLeft: false },
     };
   },
   methods: {
@@ -38,6 +38,7 @@ export default {
       const { value, selected } = this.items[item];
       this.items[item] = { value, selected: !selected };
       this.checkForBingo(item, !selected);
+      this.updateBoardStates()
     },
     checkForBingo(index, selected) {
       // Get coordinates for the item [x, y]
@@ -45,6 +46,11 @@ export default {
 
       const rowIndecies = []
       const columnIndecies = []
+      const rightToLeftIndecies = []
+      const leftToRightIndecies = []
+
+      const leftToRight = isLeftToRight(index)
+      const rightToLeft = isRightToLeft(index)
 
       if (selected) {
         for (let i = 0; i < 5; i++) {
@@ -56,6 +62,12 @@ export default {
           if (this.items[column].selected) {
             columnIndecies.push(column)
           }
+          if (leftToRight && this.items[6 * i].selected) {
+            leftToRightIndecies.push(6 * i)
+          }
+          if (rightToLeft && this.items[4 * i + 4].selected) {
+            rightToLeftIndecies.push(4 * i + 4)
+          }
         }
         if (rowIndecies.length === 5) {
           this.bingos.row.add(y)
@@ -63,11 +75,32 @@ export default {
         if (columnIndecies.length === 5) {
           this.bingos.column.add(x)
         }
+        if (leftToRightIndecies.length === 5) {
+          this.bingos.leftToRight = true
+        }
+        if (rightToLeftIndecies.length === 5) {
+          this.bingos.rightToLeft = true
+        }
       } else {
         this.bingos.row.delete(y)
         this.bingos.column.delete(x)
+
+        if (leftToRight) {
+          this.bingos.leftToRight = false
+        }
+        if (rightToLeft) {
+          this.bingos.rightToLeft = false
+        }
       }
-    }
+    },
+    updateBoardStates() {
+      for (const item in this.items) {
+        const [x, y] = indexToCoordinates(item)
+        const l2r = isLeftToRight(item) && this.bingos.leftToRight
+        const r2l = isRightToLeft(item) && this.bingos.rightToLeft
+        this.items[item].bingo = this.bingos.row.has(y) || this.bingos.column.has(x) || l2r || r2l
+      }
+    },
   },
   mounted() {
     this.newGame();
