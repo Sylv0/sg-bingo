@@ -4,7 +4,7 @@
     "Någon glömmer rally",
     "Någon blir TK bannad av artilleri",
     "Någon blir TK bannad av minor",
-    "Elis lämnar mitt i match",
+    "Någon lämnar mitt i match",
     "Yeho 3 gånger samma kväll",
     "Blåbär misslyckas med enkel uppgift",
     "Ingen koll på 'arming-distance'",
@@ -15,8 +15,7 @@
     "QUACK",
     "Danne är olämplig",
     "...så har jag inget sagt",
-    "Femboy commander (Badji)",
-    "Jonas får sin båt",
+    "Åka båt",
     "HAB mitt på målet",
     "HAB långt från målet",
     "Fordon välter",
@@ -38,6 +37,9 @@
     "Klagar på laget",
     "Någon säger att vi behöver balansera",
     "SG balanserar",
-    "\"Kan någon flytta mig?\""
+    "\"Kan någon flytta mig?\"",
+    "Förare är AFK",
+    "Någon blir ivägslängd av fordon",
+    "Lågt med tickets, men folk ger upp direkt"
   ]
 }
