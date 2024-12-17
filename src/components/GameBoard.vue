@@ -1,12 +1,10 @@
 <template>
-  <div class="container">
-    <ul class="grid">
-      <li class="grid-item" v-for="(item, index) in items" @click="$emit('updateItem', index)" v-bind:key="index"
-        :class="{ selected: item.selected, bingo: item.bingo }">
-        {{ item.value }}
-      </li>
-    </ul>
-  </div>
+  <ul class="grid">
+    <li class="grid-item" v-for="(item, index) in items" @click="$emit('updateItem', index)" v-bind:key="index"
+      :class="{ selected: item.selected, bingo: item.bingo }">
+      {{ item.value }}
+    </li>
+  </ul>
 </template>
 
 <script>

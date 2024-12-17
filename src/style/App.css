@@ -1,6 +1,3 @@
-body {
-  margin: 0;
-}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -11,9 +8,15 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+
 #primary-header {
   background: #334;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
 }
+
 #primary-main {
   flex-grow: 1;
   display: flex;
@@ -21,6 +24,7 @@ body {
   align-items: center;
   background: #222;
 }
+
 #primary-footer {
   background: #334;
 }

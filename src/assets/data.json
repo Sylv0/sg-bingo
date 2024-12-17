@@ -1,5 +1,5 @@
 {
-  "squad": [
+  "SG": [
     "Någon kommenterar Sylv0s tagg",
     "Någon glömmer rally",
     "Någon blir TK bannad av artilleri",
@@ -41,5 +41,11 @@
     "Förare är AFK",
     "Någon blir ivägslängd av fordon",
     "Lågt med tickets, men folk ger upp direkt"
+  ],
+  "SI": [
+    "Example"
+  ],
+  "n47": [
+    "Example"
   ]
 }

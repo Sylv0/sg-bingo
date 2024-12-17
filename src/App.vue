@@ -1,11 +1,17 @@
 <template>
   <header id="primary-header">
     <h1>SG Bingo</h1>
+    <select @change="changeData" v-model="selectedData">
+      <option v-for="key in Object.keys(this.data)" :value="key" v-bind:key="key">{{ key }}</option>
+    </select>
     <button @click="newGame">New game</button>
   </header>
   <main id="primary-main">
-    <section>
+    <section v-if="items.length > 0">
       <GameBoard :items="items" :bingos="bingos" @update-item="updateItem"></GameBoard>
+    </section>
+    <section v-else>
+      <p>Select a set...</p>
     </section>
   </main>
   <footer id="primary-footer">
@@ -24,13 +30,16 @@ export default {
   },
   data() {
     return {
+      data,
+      selectedData: "SG",
       items: [],
       bingos: { row: new Set(), column: new Set(), leftToRight: false, rightToLeft: false },
     };
   },
   methods: {
     newGame() {
-      this.items = getItems([...data.squad]);
+      if (this.selectedData === undefined) return
+      this.items = getItems([...data[this.selectedData]]);
       this.bingos.column.clear();
       this.bingos.row.clear();
       this.bingos.leftToRight = false;
@@ -103,6 +112,9 @@ export default {
         this.items[item].bingo = this.bingos.row.has(y) || this.bingos.column.has(x) || l2r || r2l
       }
     },
+    // changeData() {
+    //   this.newGame();
+    // }
   },
   mounted() {
     this.newGame();
